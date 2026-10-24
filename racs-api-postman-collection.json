@@ -1,0 +1,1191 @@
+{
+  "info": {
+    "_postman_id": "a5e9f82d-1144-48f6-b810-72c084f7b60e",
+    "name": "RACS AI - POST & PUT Endpoints Collection",
+    "description": "Ready-to-import Postman Collection containing all POST and PUT endpoints for the Racs AI Spring Boot Backend with pre-filled sample JSON payloads and environment variables.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "workspaceId",
+      "value": "ws-sample-id",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "user-sample-id",
+      "type": "string"
+    },
+    {
+      "key": "adminUserId",
+      "value": "admin-sample-id",
+      "type": "string"
+    },
+    {
+      "key": "jobId",
+      "value": "job-sample-id",
+      "type": "string"
+    },
+    {
+      "key": "candidateId",
+      "value": "candidate-sample-id",
+      "type": "string"
+    },
+    {
+      "key": "inviteToken",
+      "value": "sample-invite-token",
+      "type": "string"
+    },
+    {
+      "key": "sessionToken",
+      "value": "sample-session-token",
+      "type": "string"
+    },
+    {
+      "key": "resetToken",
+      "value": "sample-reset-token",
+      "type": "string"
+    },
+    {
+      "key": "questionId",
+      "value": "question-sample-id",
+      "type": "string"
+    },
+    {
+      "key": "sequenceId",
+      "value": "sequence-sample-id",
+      "type": "string"
+    },
+    {
+      "key": "reportId",
+      "value": "report-sample-id",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Workspaces",
+      "item": [
+        {
+          "name": "POST - Create Workspace & Admin (Sign Up)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companyName\": \"Acme Technologies Ltd\",\n  \"companyAddress\": \"100 Innovation Blvd, Tech Park, Suite 400\",\n  \"gstin\": \"29ABCDE1234F1Z5\",\n  \"companyPhone\": \"+15551234567\",\n  \"adminFullName\": \"Alice Smith\",\n  \"adminEmail\": \"admin@acme.test\",\n  \"adminPassword\": \"Password@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/workspaces/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "workspaces",
+                "signup"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET - List All Workspaces",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/workspaces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "workspaces"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET - Get Workspace by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/workspaces/{{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "workspaces",
+                "{{workspaceId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT - Update Workspace Settings",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companyName\": \"Acme Global Enterprise Inc\",\n  \"companyAddress\": \"200 Horizon Tower, Silicon District\",\n  \"gstin\": \"29ABCDE1234F1Z5\",\n  \"companyPhone\": \"+15559876543\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/workspaces/{{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "workspaces",
+                "{{workspaceId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Delete Workspace (Hard Delete)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/workspaces/{{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "workspaces",
+                "{{workspaceId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Authentication & Password Reset",
+      "item": [
+        {
+          "name": "POST - User Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@acme.test\",\n  \"password\": \"Password@123\",\n  \"rememberMe\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST - User Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout?sessionToken={{sessionToken}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ],
+              "query": [
+                {
+                  "key": "sessionToken",
+                  "value": "{{sessionToken}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST - Request Password Reset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@acme.test\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/password-reset/request",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "password-reset",
+                "request"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST - Execute Password Reset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newPassword\": \"NewSecurePass@2026!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/password-reset/execute/{{resetToken}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "password-reset",
+                "execute",
+                "{{resetToken}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. User & Team Management",
+      "item": [
+        {
+          "name": "POST - Sign Up via Invitation Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Taylor Recruiter\",\n  \"email\": \"taylor.ta@acme.test\",\n  \"password\": \"Recruiter@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/signup/{{inviteToken}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "signup",
+                "{{inviteToken}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT - Revoke User Access",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/revoke?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}",
+                "revoke"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Invitations",
+      "item": [
+        {
+          "name": "POST - Generate Role Invite Link (48-hr TTL)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workspaceId\": \"{{workspaceId}}\",\n  \"createdByUserId\": \"{{adminUserId}}\",\n  \"invitedRole\": \"Talent Acquisition (TA)\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/invitations/generate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "invitations",
+                "generate"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Job Postings",
+      "item": [
+        {
+          "name": "POST - Create Job Posting",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobTitle\": \"Senior Full-Stack Engineer\",\n  \"department\": \"Core Engineering\",\n  \"minExperienceYears\": 5,\n  \"requiredSkills\": \"React 19, Spring Boot 4, MySQL, Tailwind CSS, REST APIs\",\n  \"fullDescription\": \"We are looking for an exceptional full-stack developer to architect robust hiring pipelines and scalable backend microservices.\",\n  \"employmentType\": \"Full-time\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/jobs?workspaceId={{workspaceId}}&createdByUserId={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jobs"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                },
+                {
+                  "key": "createdByUserId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET - List Active Jobs in Workspace",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jobs/workspace/{{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jobs",
+                "workspace",
+                "{{workspaceId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET - Get Specific Job Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jobs/{{jobId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jobs",
+                "{{jobId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT - Update Job Posting",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobTitle\": \"Lead Full-Stack Architect\",\n  \"department\": \"Enterprise Platforms\",\n  \"minExperienceYears\": 7,\n  \"requiredSkills\": \"React 19, Java 17, Spring Boot, MySQL, Cloud Architecture\",\n  \"fullDescription\": \"Lead our next-generation hiring intelligence platform with cross-laptop real-time sync.\",\n  \"employmentType\": \"Full-time\",\n  \"status\": \"Active\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/jobs/{{jobId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jobs",
+                "{{jobId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Soft Delete Job Posting",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jobs/{{jobId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "jobs",
+                "{{jobId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Candidates & Resumes",
+      "item": [
+        {
+          "name": "POST - Upload Candidate Resume",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateName\": \"Marcus Sterling\",\n  \"originalFileUrl\": \"https://storage.racsai.io/resumes/marcus_sterling.pdf\",\n  \"fileType\": \"pdf\",\n  \"fileSizeKb\": 2048,\n  \"extractedText\": \"Marcus Sterling - Principal Systems Engineer. 8+ years building enterprise SaaS, distributed message queues, Spring Boot, and React applications.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/candidates?workspaceId={{workspaceId}}&jobId={{jobId}}&uploadedByUserId={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "candidates"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                },
+                {
+                  "key": "jobId",
+                  "value": "{{jobId}}"
+                },
+                {
+                  "key": "uploadedByUserId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET - Get Candidate Details & Resume URL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/candidates/{{candidateId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "candidates",
+                "{{candidateId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET - List Candidates by Job",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/candidates/job/{{jobId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "candidates",
+                "job",
+                "{{jobId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT - Save Parsed Resume Text",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"extractedText\": \"FULL PARSED RESUME TEXT:\\nCandidate: Marcus Sterling\\nSkills: Java, React, Docker, Kubernetes, MySQL\\nExperience: Lead Software Architect at CloudScale (5 years)\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/candidates/{{candidateId}}/parse?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "candidates",
+                "{{candidateId}}",
+                "parse"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Delete Candidate Resume (Cascading Delete)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/candidates/{{candidateId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "candidates",
+                "{{candidateId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. AI Evaluation & Match Scoring",
+      "item": [
+        {
+          "name": "POST - Initialize Evaluation Record",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/evaluations/initialize?workspaceId={{workspaceId}}&candidateId={{candidateId}}&jobId={{jobId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "evaluations",
+                "initialize"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                },
+                {
+                  "key": "candidateId",
+                  "value": "{{candidateId}}"
+                },
+                {
+                  "key": "jobId",
+                  "value": "{{jobId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT - Save AI Evaluation Result",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matchScorePercent\": 94,\n  \"apiResponseJson\": \"{\\\"match_score\\\": 94, \\\"recommendation\\\": \\\"Strong Hire\\\", \\\"executive_summary\\\": \\\"Candidate exhibits tier-1 architecture competencies and flawless alignment with requirements.\\\", \\\"skills_breakdown\\\": {\\\"react\\\": 95, \\\"spring_boot\\\": 92, \\\"database\\\": 90}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/evaluations/save-result/{{candidateId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "evaluations",
+                "save-result",
+                "{{candidateId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT - Flag Evaluation Timeout Failure",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/evaluations/timeout/{{candidateId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "evaluations",
+                "timeout",
+                "{{candidateId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. Candidate Hiring Pipeline",
+      "item": [
+        {
+          "name": "PUT - Transition Candidate Pipeline Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newStatus\": \"Interviewing\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/pipeline/{{candidateId}}/status?workspaceId={{workspaceId}}&userId={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "pipeline",
+                "{{candidateId}}",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                },
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "9. Interview Checklist & Grading",
+      "item": [
+        {
+          "name": "POST - Generate Interview Checklist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"questions\": [\n    \"Explain how Spring Boot manages transaction boundaries with @Transactional.\",\n    \"How do you optimize React 19 server components and custom hook re-renders?\",\n    \"Design a high-throughput cache invalidation mechanism using Redis pub/sub.\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/interviews/generate?workspaceId={{workspaceId}}&candidateId={{candidateId}}&jobId={{jobId}}&generatedByUserId={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "interviews",
+                "generate"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                },
+                {
+                  "key": "candidateId",
+                  "value": "{{candidateId}}"
+                },
+                {
+                  "key": "jobId",
+                  "value": "{{jobId}}"
+                },
+                {
+                  "key": "generatedByUserId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT - Grade Interview Question",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isPassed\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/interviews/questions/{{questionId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "interviews",
+                "questions",
+                "{{questionId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "10. HR Handoff & Offer Processing",
+      "item": [
+        {
+          "name": "POST - Create HR Handoff Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"finalHmNotes\": \"Exceptional candidate. All technical rounds passed with top scores. Recommended for Senior Staff Level. Please initiate offer package.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/handoffs?workspaceId={{workspaceId}}&candidateId={{candidateId}}&jobId={{jobId}}&hiringManagerId={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "handoffs"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                },
+                {
+                  "key": "candidateId",
+                  "value": "{{candidateId}}"
+                },
+                {
+                  "key": "jobId",
+                  "value": "{{jobId}}"
+                },
+                {
+                  "key": "hiringManagerId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT - Process Offer",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/handoffs/{{reportId}}/process?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "handoffs",
+                "{{reportId}}",
+                "process"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "11. Candidate Post-Offer Engagement",
+      "item": [
+        {
+          "name": "POST - Configure Engagement Sequence",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"templateText\": \"Welcome to Acme Corp! We are excited to welcome you. Here is your Day-1 checklist and onboarding schedule.\",\n  \"sequenceTimingDays\": 3\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/engagements/sequences?workspaceId={{workspaceId}}&userId={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "engagements",
+                "sequences"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                },
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT - Toggle Engagement Sequence Active Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/engagements/sequences/{{sequenceId}}/toggle?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "engagements",
+                "sequences",
+                "{{sequenceId}}",
+                "toggle"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST - Auto-Enroll Candidate in Sequence",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/engagements/enroll/{{candidateId}}?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "engagements",
+                "enroll",
+                "{{candidateId}}"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "12. Enterprise BYOK & Analytics",
+      "item": [
+        {
+          "name": "POST - Configure BYOK API Key (AES Encrypted)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providerName\": \"Gemini\",\n  \"rawApiKey\": \"AIzaSyD-SampleGeminiKey123456789\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/byok/configure?workspaceId={{workspaceId}}&userId={{adminUserId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "byok",
+                "configure"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                },
+                {
+                  "key": "userId",
+                  "value": "{{adminUserId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST - Log AI API Usage",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providerName\": \"Gemini\",\n  \"endpointCalled\": \"/v1beta/models/gemini-1.5-flash:generateContent\",\n  \"responseStatus\": \"200\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/byok/log?workspaceId={{workspaceId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "byok",
+                "log"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST - Export Pipeline Analytics Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startDate\": \"2026-01-01\",\n  \"endDate\": \"2026-12-31\",\n  \"exportFormat\": \"CSV\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/analytics/export?workspaceId={{workspaceId}}&userId={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "analytics",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "workspaceId",
+                  "value": "{{workspaceId}}"
+                },
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
